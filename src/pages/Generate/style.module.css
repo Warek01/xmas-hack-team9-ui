@@ -1,3 +1,55 @@
-@keyframes __ {
-    
+.z1 {
+    animation: _z1 linear infinite 3s;
+    opacity: 0;
+}
+
+.z2 {
+    animation: _z2 linear infinite 3s;
+    opacity: 0;
+}
+
+.z3 {
+    animation: _z3 linear infinite 3s;
+    opacity: 0;
+}
+
+@keyframes _z1 {
+    0% {
+        opacity: 0;
+    }
+
+    25%, 50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes _z2 {
+    0%, 25% {
+        opacity: 0;
+    }
+
+    50%, 75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes _z3 {
+    0%, 50% {
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }

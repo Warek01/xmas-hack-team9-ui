@@ -1,6 +1,11 @@
 import { FC, memo, useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { AppRoute } from '@enums/app-route';
+import * as icons from '@icons';
+
+import style from './style.module.css';
+import classNames from 'classnames';
 
 const GenerateSchedulePage: FC = () => {
   const navigate = useNavigate();
@@ -8,7 +13,7 @@ const GenerateSchedulePage: FC = () => {
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
   const handleGenerate = useCallback(async () => {
-    setIsGenerating(true)
+    setIsGenerating(true);
 
     setTimeout(() => {
       // TODO: connect generation
@@ -30,12 +35,29 @@ const GenerateSchedulePage: FC = () => {
     <main className="flex items-center justify-center flex-1 h-full">
       {isGenerating ? (
         <div className="flex flex-col items-center gap-28">
-          <img
-            alt="generating"
-            src="/generate/sleep.png"
-            width={220}
-            height={280}
-          />
+          <div className="relative">
+            <img
+              alt="generating"
+              src="/generate/sleep.svg"
+              width={220}
+              height={280}
+            />
+            <icons.Z
+              className={classNames('absolute top-[210px] left-[140px] fill-white', style.z1)}
+              width={25}
+              height={25}
+            />
+            <icons.Z
+              className={classNames('absolute top-[180px] left-[180px] fill-white', style.z2)}
+              width={25}
+              height={25}
+            />
+            <icons.Z
+              className={classNames('absolute top-[120px] left-[190px] fill-white', style.z3)}
+              width={25}
+              height={25}
+            />
+          </div>
           <h1 className="text-3xl text-center max-w-[900px]">
             Generating schedules at the speed of thought. Just a moment longer!
           </h1>
