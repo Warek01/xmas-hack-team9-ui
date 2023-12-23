@@ -5,6 +5,8 @@ import { ModalWindow, TextInput } from '@components';
 import type { ModalWindowsSharedProps } from '@components/modal-windows/types';
 import type { AddProfessor } from '@/types/add-entities';
 import { hasNullishValue } from '@helpers/has-nullish-value';
+import { convertCoursesToArr } from '@helpers/convert-courses-to-arr';
+import { AddOptions } from '@/pages/Timetable/enums';
 
 const CreateProfessorModal: FC<ModalWindowsSharedProps<AddProfessor>> = ({
   onClose,
@@ -21,27 +23,25 @@ const CreateProfessorModal: FC<ModalWindowsSharedProps<AddProfessor>> = ({
   const [saturdayCourses, setSaturdayCourses] = useState<string>('');
 
   const handleSave = useCallback(() => {
-    if (
-      hasNullishValue([
-        isLab,
-        name,
-        subject,
-        mondayCourses,
-        tuesdayCourses,
-        wednesdayCourses,
-        thursdayCourses,
-        fridayCourses,
-        saturdayCourses,
-      ])
-    ) {
+    if (hasNullishValue([isLab, name, subject])) {
       toast('All values must be filled', { type: 'warning' });
       return;
     }
 
-    // onSave({
-    //   isLab,
-    //   name,
-    // });
+    onSave({
+      type: AddOptions.PROF,
+      data: {
+        isLab,
+        name,
+        subject,
+        mondayCourses: convertCoursesToArr(mondayCourses.split(',')),
+        tuesdayCourses: convertCoursesToArr(tuesdayCourses.split(',')),
+        wednesdayCourses: convertCoursesToArr(wednesdayCourses.split(',')),
+        thursdayCourses: convertCoursesToArr(thursdayCourses.split(',')),
+        fridayCourses: convertCoursesToArr(fridayCourses.split(',')),
+        saturdayCourses: convertCoursesToArr(saturdayCourses.split(',')),
+      },
+    });
 
     onClose();
   }, [
@@ -73,8 +73,43 @@ const CreateProfessorModal: FC<ModalWindowsSharedProps<AddProfessor>> = ({
           name="subject"
           placeholder="Subject"
         />
+        <TextInput
+          value={mondayCourses}
+          setValue={setMondayCourses}
+          name="monday-courses"
+          placeholder="Monday courses"
+        />
+        <TextInput
+          value={tuesdayCourses}
+          setValue={setTuesdayCourses}
+          name="tuesday-courses"
+          placeholder="Tuesday courses"
+        />
+        <TextInput
+          value={wednesdayCourses}
+          setValue={setWednesdayCourses}
+          name="wednesday-courses"
+          placeholder="Wednesday courses"
+        />
+        <TextInput
+          value={thursdayCourses}
+          setValue={setThursdayCourses}
+          name="thursday-courses"
+          placeholder="Thursday courses"
+        />
+        <TextInput
+          value={fridayCourses}
+          setValue={setFridayCourses}
+          name="friday-courses"
+          placeholder="Friday courses"
+        />
+        <TextInput
+          value={saturdayCourses}
+          setValue={setSaturdayCourses}
+          name="saturday-courses"
+          placeholder="Saturday courses"
+        />
         <label className="flex items-center gap-2">
-          <span className="text-white">Laboratory</span>
           <input
             type="checkbox"
             name="is-lab"
@@ -82,9 +117,10 @@ const CreateProfessorModal: FC<ModalWindowsSharedProps<AddProfessor>> = ({
             onChange={(e) => setIsLab(e.target.checked)}
             checked={isLab}
           />
+          <span className="text-white">Laboratory</span>
         </label>
         <button
-          className="px-3 py-1.5 bg-secondary rounded-full w-fit text-white font-medium self-end"
+          className="px-3 py-1.5 mt-5 bg-secondary rounded-full w-fit text-white font-medium self-end"
           onClick={handleSave}
         >
           Save

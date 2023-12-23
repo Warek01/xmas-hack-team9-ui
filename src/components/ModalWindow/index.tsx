@@ -13,7 +13,7 @@ const ModalWindow: FC<PropsWithChildren<ModalWindowProps>> = ({
   return (
     <Modal>
       <div className="absolute inset-0 w-screen h-screen flex items-center justify-center z-50 bg-black/30">
-        <div className="bg-primary rounded-2xl p-4 relative drop-shadow-2xl flex flex-col">
+        <div className="bg-primary rounded-2xl p-5 relative drop-shadow-2xl flex flex-col">
           <div className="flex items-center justify-between gap-4 pb-1">
             <p className="text-white text-[18px]">{title}</p>
             <button

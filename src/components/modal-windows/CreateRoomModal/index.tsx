@@ -5,6 +5,7 @@ import { ModalWindow, TextInput } from '@components';
 import type { ModalWindowsSharedProps } from '@components/modal-windows/types';
 import type { AddRoom } from '@/types/add-entities';
 import { hasNullishValue } from '@helpers/has-nullish-value';
+import { AddOptions } from '@/pages/Timetable/enums';
 
 const CreateRoomModal: FC<ModalWindowsSharedProps<AddRoom>> = ({
   onClose,
@@ -21,9 +22,12 @@ const CreateRoomModal: FC<ModalWindowsSharedProps<AddRoom>> = ({
     }
 
     onSave({
-      isLab,
-      peopleCount: parseInt(peopleCount),
-      name,
+      type: AddOptions.ROOM,
+      data: {
+        isLab,
+        peopleCount: parseInt(peopleCount),
+        name,
+      },
     });
 
     onClose();
@@ -46,7 +50,6 @@ const CreateRoomModal: FC<ModalWindowsSharedProps<AddRoom>> = ({
           placeholder="No. of people"
         />
         <label className="flex items-center gap-2">
-          <span className="text-white">Laboratory</span>
           <input
             type="checkbox"
             name="is-lab"
@@ -54,9 +57,10 @@ const CreateRoomModal: FC<ModalWindowsSharedProps<AddRoom>> = ({
             onChange={(e) => setIsLab(e.target.checked)}
             checked={isLab}
           />
+          <span className="text-white">Laboratory</span>
         </label>
         <button
-          className="px-3 py-1.5 bg-secondary rounded-full w-fit text-white font-medium self-end"
+          className="px-3 py-1.5 mt-5 bg-secondary rounded-full w-fit text-white font-medium self-end"
           onClick={handleSave}
         >
           Save

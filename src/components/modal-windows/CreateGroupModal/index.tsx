@@ -6,6 +6,7 @@ import type { ModalWindowsSharedProps } from '@components/modal-windows/types';
 import { supportedLanguages } from '@constants/supported-languages';
 import type { AddGroup } from '@/types/add-entities';
 import { hasNullishValue } from '@helpers/has-nullish-value';
+import { AddOptions } from '@/pages/Timetable/enums';
 
 const CreateGroupModal: FC<ModalWindowsSharedProps<AddGroup>> = ({
   onClose,
@@ -23,10 +24,13 @@ const CreateGroupModal: FC<ModalWindowsSharedProps<AddGroup>> = ({
     }
 
     onSave({
-      peopleCount: parseInt(peopleCount),
-      subjectIds: subjectIds.split(',').map((sub) => sub.trim()),
-      speciality,
-      language,
+      type: AddOptions.GROUP,
+      data: {
+        peopleCount: parseInt(peopleCount),
+        subjectIds: subjectIds.split(',').map((sub) => sub.trim()),
+        speciality,
+        language,
+      },
     });
 
     onClose();
@@ -61,7 +65,7 @@ const CreateGroupModal: FC<ModalWindowsSharedProps<AddGroup>> = ({
           placeholder="Language"
         />
         <button
-          className="px-3 py-1.5 bg-secondary rounded-full w-fit text-white font-medium self-end"
+          className="px-3 py-1.5 mt-5 bg-secondary rounded-full w-fit text-white font-medium self-end"
           onClick={handleSave}
         >
           Save

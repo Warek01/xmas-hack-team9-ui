@@ -1,7 +1,13 @@
 import { RouteObject } from 'react-router';
 
 import { AppRoute } from '@enums/app-route';
-import { GenerateSchedulePage, HomePage } from '@/pages';
+import {
+  GenerateSchedulePage,
+  HomePage,
+  ResourcesPage,
+  RoomAvailabilityPage,
+  TimetablePage,
+} from '@/pages';
 import App from '@/App';
 
 export const appRoutes: RouteObject[] = [
@@ -19,9 +25,15 @@ export const appRoutes: RouteObject[] = [
       },
       {
         path: AppRoute.TIMETABLE,
+        element: <TimetablePage />,
       },
       {
         path: AppRoute.RESOURCES,
+        element: <ResourcesPage />,
+      },
+      {
+        path: AppRoute.ROOM_AVAILABILITY,
+        element: <RoomAvailabilityPage />,
       },
     ],
   },

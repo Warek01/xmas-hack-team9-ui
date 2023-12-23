@@ -5,6 +5,7 @@ import { ModalWindow, TextInput } from '@components';
 import type { ModalWindowsSharedProps } from '@components/modal-windows/types';
 import type { AddSubject } from '@/types/add-entities';
 import { hasNullishValue } from '@helpers/has-nullish-value';
+import { AddOptions } from '@/pages/Timetable/enums';
 
 const CreateSubjectModal: FC<ModalWindowsSharedProps<AddSubject>> = ({
   onClose,
@@ -35,13 +36,16 @@ const CreateSubjectModal: FC<ModalWindowsSharedProps<AddSubject>> = ({
     }
 
     onSave({
-      courseName,
-      year: parseInt(year),
-      semester: parseInt(semester),
-      theoryHoursCount: parseInt(theoryHoursCount),
-      practiceHoursCount: parseInt(practiceHoursCount),
-      labHoursCount: parseInt(labHoursCount),
-      totalHoursCount: parseInt(totalHoursCount),
+      type: AddOptions.SUB,
+      data: {
+        courseName,
+        year: parseInt(year),
+        semester: parseInt(semester),
+        theoryHoursCount: parseInt(theoryHoursCount),
+        practiceHoursCount: parseInt(practiceHoursCount),
+        labHoursCount: parseInt(labHoursCount),
+        totalHoursCount: parseInt(totalHoursCount),
+      },
     });
     onClose();
   }, [
@@ -108,7 +112,7 @@ const CreateSubjectModal: FC<ModalWindowsSharedProps<AddSubject>> = ({
           placeholder="Total no. hours"
         />
         <button
-          className="px-3 py-1.5 bg-secondary rounded-full w-fit text-white font-medium self-end"
+          className="px-3 py-1.5 mt-5 bg-secondary rounded-full w-fit text-white font-medium self-end"
           onClick={handleSave}
         >
           Save

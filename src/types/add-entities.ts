@@ -26,10 +26,10 @@ export interface AddProfessor {
   name: string;
   subject: string;
   isLab: boolean;
-  mondayCourses: boolean[]
-  tuesdayCourses: boolean[]
-  wednesdayCourses: boolean[]
-  thursdayCourses: boolean[]
-  fridayCourses: boolean[]
-  saturdayCourses: boolean[]
+  mondayCourses: number[]
+  tuesdayCourses: number[]
+  wednesdayCourses: number[]
+  thursdayCourses: number[]
+  fridayCourses: number[]
+  saturdayCourses: number[]
 }

@@ -15,7 +15,7 @@ const Dropdown: FC<DropdownProps> = ({
 }) => {
   return (
     <div className={cn('cursor-pointer group w-fit -mb-1 pb-1', className)}>
-      <div className="bg-white flex items-center gap-1 rounded-full w-fit px-3 py-1.5">
+      <div className="bg-white flex items-center gap-1 rounded-full w-fit px-3 py-2.5">
         <span className={selectedOption ? 'text-secondary' : 'text-light-gray'}>
           {selectedOption ?? placeholder}
         </span>
