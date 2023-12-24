@@ -14,6 +14,9 @@ import type { ModalWindowsSharedProps } from '@components/modal-windows/types';
 
 import { AddOptions, Semester, Year } from './enums';
 import { ScheduleDetails } from '@components/Table/types';
+import Generating from '@/pages/Generate';
+import { toast } from 'react-toastify';
+import loading = toast.loading;
 
 const processAcademicGroups = (scheduleDetails) => {
   return Object.keys(scheduleDetails);
@@ -29,6 +32,7 @@ const TimetablePage: FC = () => {
     StringParam,
   );
 
+  const [loading, setLoading] = useState(false);
   const [academicGroups, setAcademicGroups] = useState<string[]>([]);
   const [scheduleDetails, setScheduleDetails] = useState<any>(null);
 
@@ -62,12 +66,19 @@ const TimetablePage: FC = () => {
 
   useEffect(() => {
     (async () => {
-      const req = await fetch('http://localhost:3000/api/schedule', {
+      try {
+        setLoading(true);
+        const req = await fetch('http://localhost:3000/api/schedule', {
 
-      });
-      const data = await req.json();
-      setScheduleDetails(data);
-      setAcademicGroups(processAcademicGroups(data))
+        });
+        const data = await req.json();
+        setScheduleDetails(data);
+        setAcademicGroups(processAcademicGroups(data))
+      } catch (e) {
+
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
@@ -83,36 +94,45 @@ const TimetablePage: FC = () => {
               current timetable and quickly manage the schedule.
             </p>
           </div>
-          <div className="flex items-center gap-4">
-            <Link
-              to={AppRoute.RESOURCES}
-              className="px-3 py-2.5 rounded-full duration-100 bg-secondary hover:bg-secondary/70"
-            >
-              View resources
-            </Link>
-            <Dropdown
-              options={Object.values(AddOptions)}
-              setSelectedOption={setModalOpen}
-              selectedOption={modalOpen}
-              placeholder="Add"
-            />
-          </div>
+          {
+            scheduleDetails &&
+            <div className="flex items-center gap-4">
+              <Link
+                to={AppRoute.RESOURCES}
+                className="px-3 py-2.5 rounded-full duration-100 bg-secondary hover:bg-secondary/70"
+              >
+                View resources
+              </Link>
+              <Dropdown
+                options={Object.values(AddOptions)}
+                setSelectedOption={setModalOpen}
+                selectedOption={modalOpen}
+                placeholder="Add"
+              />
+            </div>
+          }
         </div>
 
-        <nav className="flex items-center justify-between">
-          <Tabs
-            tabs={Object.values(Year)}
-            selectedTab={year}
-            setSelectedTab={setYear}
-          />
-          <Tabs
-            tabs={Object.values(Semester)}
-            selectedTab={semester}
-            setSelectedTab={setSemester}
-          />
-        </nav>
+        {
+          scheduleDetails &&
+          <nav className="flex items-center justify-between">
+            <Tabs
+              tabs={Object.values(Year)}
+              selectedTab={year}
+              setSelectedTab={setYear}
+            />
+            <Tabs
+              tabs={Object.values(Semester)}
+              selectedTab={semester}
+              setSelectedTab={setSemester}
+            />
+          </nav>
+        }
 
         <main className="oveflow-auto">
+          {
+            loading && <Generating isGenerating={loading} setIsGenerating={setLoading} />
+          }
           {scheduleDetails && (
             <Table
               academicGroups={academicGroups}

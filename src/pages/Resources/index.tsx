@@ -98,7 +98,7 @@ const ResourcesPage: FC = () => {
             </div>
             <div className="overflow-x-auto w-[55%] h-full flex items-center justify-start px-8 text-ellipsis overflow-hidden text-nowrap">
               {m.subjects
-                .slice(1)
+                ?.slice(1)
                 .reduce((s1, s2) => s1 + ', ' + s2, m.subjects[0])}
             </div>
           </div>

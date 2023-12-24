@@ -7,18 +7,9 @@ import * as icons from '@icons';
 import style from './style.module.css';
 import classNames from 'classnames';
 
-const GenerateSchedulePage: FC = () => {
-  const navigate = useNavigate();
-
-  const [isGenerating, setIsGenerating] = useState<boolean>(false);
-
+const Generating: FC = ({ isGenerating, setIsGenerating }) => {
   const handleGenerate = useCallback(async () => {
     setIsGenerating(true);
-
-    setTimeout(() => {
-      // TODO: connect generation
-      navigate(AppRoute.TIMETABLE);
-    }, 2000);
   }, []);
 
   useEffect(() => {
@@ -89,4 +80,4 @@ const GenerateSchedulePage: FC = () => {
   );
 };
 
-export default memo(GenerateSchedulePage);
+export default memo(Generating);
