@@ -5,3 +5,7 @@
 ::placeholder {
   @apply text-light-gray font-medium;
 }
+
+body {
+  @apply overflow-x-hidden;
+}

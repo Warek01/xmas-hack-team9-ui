@@ -13,11 +13,16 @@ export type ScheduleDetails = {
 export type DayRow = {
   day: string;
   isDayRow: boolean;
-  [group: string]: string;
-};
+  // [group: string]: string;
+} & Record<string, string>;
 
 export type TimeSlotRow = {
   time: string;
   isDayRow: boolean;
-  [group: string]: string;
-};
+  // [group: string]: string;
+} & Record<string, string>;
+
+export interface TableProps {
+  academicGroups: string[]
+  scheduleDetails: ScheduleDetails
+}

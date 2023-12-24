@@ -6,6 +6,7 @@ import ModalWindow from './ModalWindow';
 import TextInput from './TextInput';
 import Dropdown from './Dropdown';
 import Tabs from './Tabs';
+import Table from './Table';
 
 export {
   Layout,
@@ -16,4 +17,5 @@ export {
   TextInput,
   Dropdown,
   Tabs,
+  Table,
 };

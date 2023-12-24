@@ -1,4 +1,4 @@
-import { FC, memo, PropsWithChildren } from 'react';
+import { FC, memo, PropsWithChildren, useEffect } from 'react';
 
 import { Modal } from '@components';
 import * as icons from '@icons';
@@ -10,6 +10,12 @@ const ModalWindow: FC<PropsWithChildren<ModalWindowProps>> = ({
   onClose,
   title,
 }) => {
+  useEffect(() => {
+    document.querySelector('*').scrollTo({ top: 0, left: 0 });
+    document.body.classList.add('overflow-hidden');
+    return () => document.body.classList.remove('overflow-hidden');
+  }, []);
+
   return (
     <Modal>
       <div className="absolute inset-0 w-screen h-screen flex items-center justify-center z-50 bg-black/30">

@@ -5,11 +5,11 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <main
       className="relative bg-primary text-white font-dm-sans text-xl font-normal
-      overflow-auto w-screen min-h-screen"
+      overflow-auto w-screen max-w-[100vw] overflow-x-hidden min-h-screen"
     >
-      <div className="overflow-auto min-h-screen flex flex-col flex-1">
+      <div className="overflow-y-auto overflow-x-hidden min-h-screen flex flex-col flex-1">
         <Header />
-        <div className="flex flex-1 justify-center">
+        <div id="overflow-element" className="flex flex-1 overflow-x-hidden max-w-[100vw] justify-center">
           <div className="max-w-8xl flex-1 overflow-auto">{children}</div>
         </div>
         <Footer />
