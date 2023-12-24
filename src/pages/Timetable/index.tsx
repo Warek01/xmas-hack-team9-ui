@@ -2,7 +2,7 @@ import { FC, memo, useEffect, useMemo, useState } from 'react';
 import { StringParam, useQueryParam } from 'use-query-params';
 import { Link } from 'react-router-dom';
 
-import { Dropdown, Tabs, Table } from '@components';
+import { Dropdown, Table, Tabs } from '@components';
 import { AppRoute } from '@enums/app-route';
 import {
   CreateGroupModal,
@@ -12,109 +12,12 @@ import {
 } from '@components/modal-windows';
 import type { ModalWindowsSharedProps } from '@components/modal-windows/types';
 
-import { Year, Semester, AddOptions } from './enums';
+import { AddOptions, Semester, Year } from './enums';
 import { ScheduleDetails } from '@components/Table/types';
 
-// const scheduleDetails = {
-//   'AI-213': {
-//     'Monday-8:00 - 9:30': {
-//       subject: 'Math',
-//       room: 'Room 101',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Monday-9:45 - 11:15': {
-//       subject: 'Physics',
-//       room: 'Room 101',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Monday-11:30 - 13:00': {
-//       subject: 'History',
-//       room: 'Lab 1',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Tuesday-8:00 - 9:30': {
-//       subject: 'Biology',
-//       room: 'Room 102',
-//       professorName: 'Placeholder Professor',
-//     },
-//   },
-//   'BI-118': {
-//     'Monday-8:00 - 9:30': {
-//       subject: 'Chemistry',
-//       room: 'Lab 2',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Monday-9:45 - 11:15': {
-//       subject: 'English',
-//       room: 'Room 103',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Monday-11:30 - 13:00': {
-//       subject: 'Art',
-//       room: 'Room 201',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Tuesday-8:00 - 9:30': {
-//       subject: 'Computer Science',
-//       room: 'Lab 3',
-//       professorName: 'Placeholder Professor',
-//     },
-//   },
-//   'BI-119': {
-//     'Monday-8:00 - 9:30': {
-//       subject: 'Chemistry',
-//       room: 'Lab 2',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Monday-9:45 - 11:15': {
-//       subject: 'English',
-//       room: 'Room 103',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Monday-11:30 - 13:00': {
-//       subject: 'Art',
-//       room: 'Room 201',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Tuesday-8:00 - 9:30': {
-//       subject: 'Computer Science',
-//       room: 'Lab 3',
-//       professorName: 'Placeholder Professor',
-//     },
-//   },
-//   'BI-120': {
-//     'Monday-8:00 - 9:30': {
-//       subject: 'Chemistry',
-//       room: 'Lab 2',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Monday-9:45 - 11:15': {
-//       subject: 'English',
-//       room: 'Room 103',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Monday-11:30 - 13:00': {
-//       subject: 'Art',
-//       room: 'Room 201',
-//       professorName: 'Placeholder Professor',
-//     },
-//     'Tuesday-8:00 - 9:30': {
-//       subject: 'Computer Science',
-//       room: 'Lab 3',
-//       professorName: 'Placeholder Professor',
-//     },
-//   },
-// };
-
-const academicGroups = [
-  'AI-213',
-  'BI-118',
-  'BI-119',
-  'BI-120',
-  'BI-121',
-  'BI-122',
-  'BI-123',
-];
+const processAcademicGroups = (scheduleDetails) => {
+  return Object.keys(scheduleDetails);
+}
 
 const TimetablePage: FC = () => {
   const [year = Year.FIRST, setYear] = useQueryParam<string>(
@@ -125,6 +28,8 @@ const TimetablePage: FC = () => {
     'semester',
     StringParam,
   );
+
+  const [academicGroups, setAcademicGroups] = useState<string[]>([]);
   const [scheduleDetails, setScheduleDetails] = useState<any>(null);
 
   const [modalOpen, setModalOpen] = useState<string>(null);
@@ -161,10 +66,10 @@ const TimetablePage: FC = () => {
 
       });
       const data = await req.json();
-      console.log(data);
       setScheduleDetails(data);
+      setAcademicGroups(processAcademicGroups(data))
     })();
-  }, [year, semester]);
+  }, []);
 
   return (
     <>

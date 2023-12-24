@@ -42,7 +42,7 @@ const Table: FC<TableProps> = ({ academicGroups, scheduleDetails }) => {
       <table className="overflow-x-auto min-w-full max-w-[99999px]" style={{width: `${width}px`}}>
         <thead className="bg-white text-black font-bold border-[1px] border-black text-center">
           <tr>
-            <th className="px-6 py-3 font-bold text-2xl tracking-wider border-r-0 min-w-[100px] max-w-[100px] text-center">
+            <th className="px-6 py-3 font-bold text-2xl tracking-wider border-r-0 min-w-[100px] max-w-[180px] text-center">
               Day / Time
             </th>
             <th className="border-r border-black" />
@@ -68,12 +68,12 @@ const Table: FC<TableProps> = ({ academicGroups, scheduleDetails }) => {
                     {timeIndex === 0 && (
                       <td
                         rowSpan={timeSlots.length}
-                        className="text-black border-1 border-black px-6 py-4 whitespace-nowrap text-2xl border-b-1 font-bold max-w-[94px] text-center"
+                        className="text-black border-1 border-black px-6 py-4 whitespace-nowrap text-2xl border-b-1 font-bold max-w-[150px] text-center"
                       >
                         {day}
                       </td>
                     )}
-                    <td className="border border-black px-6 py-4 whitespace-nowrap text-sm text-gray-900 max-w-[84px]">
+                    <td className="border border-black px-6 py-4 whitespace-nowrap text-sm text-gray-900 max-w-[120px]">
                       {time}
                     </td>
                     {academicGroups.map((group) => (
