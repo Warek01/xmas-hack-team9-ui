@@ -10,6 +10,9 @@ const TextInput: FC<TextInputProps> = ({
   value,
   setValue,
   placeholder,
+  Icon,
+  min,
+  max,
   disabled = false,
   type = 'text',
 }) => {
@@ -18,7 +21,7 @@ const TextInput: FC<TextInputProps> = ({
   return (
     <div
       className={cn(
-        'rounded-full py-1 px-3 bg-white overflow-hidden w-full',
+        'flex justify-between rounded-full py-1 px-3 bg-white overflow-hidden w-full',
         className,
       )}
     >
@@ -28,9 +31,12 @@ const TextInput: FC<TextInputProps> = ({
         onChange={(e) => setValue(e.target.value)}
         value={value}
         disabled={disabled}
+        min={min}
+        max={max}
         type={type}
-        className="focus-within:outline-none text-secondary placeholder:text-[]"
+        className="focus-within:outline-none text-secondary flex-1"
       />
+      {Icon && <Icon className="fill-light-gray" width={25} height={25} />}
     </div>
   );
 };

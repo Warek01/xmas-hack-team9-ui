@@ -25,6 +25,12 @@ const Header: FC = () => {
           >
             Generate schedule
           </Link>
+          <Link
+            to={AppRoute.ROOM_AVAILABILITY}
+            className="py-2.5 px-3 bg-secondary rounded-full duration-100 hover:bg-secondary/70"
+          >
+            Check room availability
+          </Link>
         </div>
       </main>
     </header>
